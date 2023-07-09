@@ -7,8 +7,8 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 
-movies = pd.read_csv("movies.csv")  # Assuming you have a CSV file named "movies.csv" containing movie data
-ratings = pd.read_csv("ratings.csv")  # Assuming you have a CSV file named "ratings.csv" containing ratings data
+movies = pd.read_csv("./movies.csv")  
+ratings = pd.read_csv("./ratings.csv")  
 
 def clean_title(title):
     title = re.sub("[^a-zA-Z0-9 ]", "", title)
@@ -32,22 +32,6 @@ def search(title):
     results = movies.iloc[indices].iloc[::-1]
     return results
 
-# def find_similar_movies(movie_id):
-#     similar_users = ratings[(ratings["movieId"] == movie_id) & (ratings["rating"] > 4)]["userId"].unique()
-#     similar_user_recs = ratings[(ratings["userId"].isin(similar_users)) & (ratings["rating"] > 4)]["movieId"]
-#     similar_user_recs = similar_user_recs.value_counts() / len(similar_users)
-
-#     similar_user_recs = similar_user_recs[similar_user_recs > .10]
-#     all_users = ratings[(ratings["userId"].isin(similar_user_recs.index)) & (ratings["rating"] > 4)]
-#     all_user_recs = all_users["movieId"].value_counts() / len(all_users["userId"].unique())
-#     rec_percentages = pd.concat([similar_user_recs, all_user_recs], axis=1)
-#     rec_percentages.columns = ["similar", "all"]
-#     rec_percentages["score"] = rec_percentages["similar"] / rec_percentages["all"]
-#     rec_percentages = rec_percentages.sort_values("score", ascending=False)
-#     recommended_movie_ids = rec_percentages.head(10).index.tolist()
-#     recommended_movies = movies[movies["movieId"].isin(recommended_movie_ids)][["title", "genres"]]
-#     recommended_movies["score"] = rec_percentages.head(10)["score"].tolist()
-#     return recommended_movies
 
 
 def find_similar_movies(movie_id):
