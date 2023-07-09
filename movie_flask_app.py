@@ -7,8 +7,8 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 
-movies = pd.read_csv("./movies.csv")  
-ratings = pd.read_csv("./ratings.csv")  
+movies = pd.read_csv("movies.csv")  
+ratings = pd.read_csv("ratings.csv")  
 
 def clean_title(title):
     title = re.sub("[^a-zA-Z0-9 ]", "", title)
