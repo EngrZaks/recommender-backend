@@ -1,12 +1,13 @@
 import os
 import requests
 import json
+import config
 
 def get_movie_image_url(title, year):
     url = "https://moviesdatabase.p.rapidapi.com/titles/search/title/{}".format(title)
     querystring = {"exact": "true", "year": str(year), "titleType": "movie"}
     headers = {
-        "X-RapidAPI-Key": "d3ac844d16mshe80ce7a39d28ba8p1dbf89jsna3bacc69939d",
+        "X-RapidAPI-Key": config.API_KEY | '',
         "X-RapidAPI-Host": "moviesdatabase.p.rapidapi.com"
     }
     try:
